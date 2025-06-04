@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Portal Home</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <h2>Welcome to the Teacher Portal</h2>
+    <button onclick="showModal()">Add Student</button>
+    <button onclick="location.href='/logout'">Logout</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Subject</th>
+                <th>Marks</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="studentTable">
+            {% for student in students %}
+            <tr data-id="{{ student.id }}">
+                <td contenteditable="true">{{ student.name }}</td>
+                <td contenteditable="true">{{ student.subject }}</td>
+                <td contenteditable="true">{{ student.marks }}</td>
+                <td>
+                    <button onclick="saveEdit({{ student.id }})">Save</button>
+                    <button onclick="deleteStudent({{ student.id }})">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span onclick="hideModal()" class="close">&times;</span>
+            <h3>Add New Student</h3>
+            <input id="name" placeholder="Name"/><br/>
+            <input id="subject" placeholder="Subject"/><br/>
+            <input id="marks" placeholder="Marks" type="number"/><br/>
+            <button onclick="addStudent()">Submit</button>
+        </div>
+    </div>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
